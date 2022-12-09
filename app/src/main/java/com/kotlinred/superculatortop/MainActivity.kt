@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun operatorAction (view: View) {
-        if (view is Button && addOp){
+        if (view is Button && addOp)
+        {
             att.append(view.text)
             addOp = false
             addDec = true
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
     fun clearInput (view: View) {
         att.text = ""
-        result.text = ""
+        resultU.text = ""
     }
     fun backSpace (view: View) {
         val pnjg = att.length()
@@ -55,38 +56,42 @@ class MainActivity : AppCompatActivity() {
     }
     fun equalAction(view: View) {
 
-        result.text=hasil()
+        resultU.text=hasil()
 
     }
 
-    private fun hasil():String{
+    private fun hasil():String
+    {
         val digitOp = digitOp()
         if(digitOp.isEmpty()) return ""
+
         val waktuPenambahan = waktuPenambahan(digitOp)
         if(waktuPenambahan.isEmpty()) return ""
-        val result = addSubCalc(waktuPenambahan)
-        return result.toString()
+
+        val resultH = addSubCalc(waktuPenambahan)
+        return resultH.toString()
     }
 
-    private fun addSubCalc(passedList: MutableList<Any>):Float{
-        var result = passedList[0] as Float
+    private fun addSubCalc(passedList: MutableList<Any>): Float
+    {
+        var resultA = passedList[0] as Float
         for (i in passedList.indices)
         {
             if(passedList[i] is Char && i != passedList.lastIndex)
             {
                 val operator = passedList[i]
-                val nextDig = passedList[i+1] as Float
+                val nextDig = passedList[i + 1] as Float
                 if (operator =='+')
-                    result += nextDig
+                    resultA += nextDig
                 if(operator == '-')
-                    result -= nextDig
+                    resultA -= nextDig
 
             }
         }
-        return result
+        return resultA
     }
 
-    private fun waktuPenambahan (passedList: MutableList<Any>):MutableList<Any>{
+    private fun waktuPenambahan (passedList: MutableList<Any>): MutableList<Any>{
         var list = passedList
         while (list.contains('x') || list.contains('÷'))
         {
@@ -95,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         return list
     }
 
-    private fun hitungBagian (passedList: MutableList<Any>):MutableList<Any>
+    private fun hitungBagian (passedList: MutableList<Any>): MutableList<Any>
     {
 
         val newList = mutableListOf<Any>()
